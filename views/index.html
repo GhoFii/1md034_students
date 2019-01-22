@@ -1,9 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>DELI-VERY</title>
-    </head>
-    <body>
-        <h1>Hello World!!!</h1>
-    </body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Page title shown in window title</title>
+    <meta charset="utf-8"/>
+  </head>
+
+  <body>
+    <main>
+      <h1>Welcome to BurgerHeaven Online</h1>
+
+      <section id="burgers">
+        <h2>Select burger</h2>
+        <div>This is where you execute burger selection</div><br>
+        <table align="center">
+            <tr>
+              <th>The Fire Burger</th>
+              <th>The Sad Burger</th>
+              <th>Cheesy Burger</th>
+            </tr>
+            <tr align="center">
+              <td><img src="https://ocweekly.com/wp-content/uploads/2018/10/6625544_slaters_fire_burger.jpg" alt="Burger" title="Burger" width="300" height="200"></td>
+              <td><img src="https://pixel.nymag.com/imgs/daily/grub/2016/08/11/11-sad-burger.w700.h467.jpg" alt="Burger" title="Burger" width="300" height="200"></td>
+              <td><img src="http://www.burgersofmelbourne.com.au/wp-content/uploads/2015/12/hold-burger-saki-souvlaki.jpg" alt="Burger" title="Burger" width="300" height="200"></td>
+            </tr>
+            <tr align="center">
+              <td><ul>
+                  <li>1250 kCal</li>
+                  <li>Contains gluten</li>
+                  <li>Contains egg</li>
+              </ul></td>
+              <td><ul>
+                  <li>750 kCal</li>
+                  <li>Contains lactose</li>
+                  <li>Contains gluten</li>
+              </ul></td>
+              <td><ul>
+                  <li>1460 kCal</li>
+                  <li>Contains lactose</li>
+              </ul></td>
+            </tr>
+        </table>
+      </section>
+
+      <section id="information">
+        <h2>Customer information</h2>
+        <div>This is where you provide necessary information</div>
+        <h3>Delivery Information:</h3>
+        <form>
+          <p>
+            <label for="firstname">First</label><br>
+            <input type="text" id="firstname" name="fn" required="required" placeholder="First name">
+          </p>
+          <p>
+            <label for="lastname">Last</label><br>
+            <input type="text" id="lastname" name="ln" required="required" placeholder="Last name">
+          </p>
+          <p>
+            <label for="email">E-mail</label><br>
+            <input type="text" id="email" name="em" required="required" placeholder="E-mail adress">
+          </p>
+           <p>
+            <label for="street">Street</label><br>
+            <input type="text" id="street" name="str" required="required" placeholder="Street name">
+           </p>
+          <p>
+            <label for="house">House</label><br>
+            <input type="text" id="house" name="hs" required="required" placeholder="House number">
+          </p>
+        </form>
+        <p>
+          <label for="payment">Payment options</label><br>
+          <select id="payment" name="pay">
+            <option>Credit card</option>
+            <option>PayPal</option>
+            <option>PaySafe</option>
+            <option>BitCoin</option>
+          </select>
+        </p>
+        <p>
+          <form action="male">
+            <label for="gender"> Gender</label><br>
+            <input type="radio" name="gender" value="male"> Male<br>
+            <input type="radio" name="gender" value="woman"> Woman<br>
+            <input type="radio" name="gender" value="non-binary"> Non-binary<br>
+            <input type="radio" name="gender" value="undisclosed" checked> Undisclosed<br>
+          </form>
+          <button type="submit"><img src="http://mobiblitz.co.za/wp-content/uploads/2014/12/Place-Order-Orange.gif"></button>
+      </section>
+    </main>
+
+    <footer>
+      <hr>
+      <div>&copy 2018 Hypothetical Burger Inc.</div>
+    </footer>
+  </body>
 </html>
