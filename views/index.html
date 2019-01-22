@@ -9,41 +9,56 @@
   <body>
     <main>
       <figure id="headerimage">
-        <h1>Welcome to BurgerHeaven Online</h1>
-        <img src="https://theelementsrestaurant.com/wp-content/uploads/2017/01/about-header-background.jpg">
+        <img id="topimage" src="http://www.craftlakewood.com/images/slideshow/craft-slide.jpg">
+        <div id="headertext">
+          <h1>Welcome to BurgerHeaven Online</h1>
+        </div>
       </figure>
 
       <section id="burgers">
         <h2>Select burger</h2>
         <div>This is where you execute burger selection</div><br>
-        <table align="center">
-            <tr>
-              <th>The Fire Burger</th>
-              <th>The Sad Burger</th>
-              <th>Cheesy Burger</th>
-            </tr>
-            <tr align="center">
-              <td><img src="https://ocweekly.com/wp-content/uploads/2018/10/6625544_slaters_fire_burger.jpg" alt="Burger" title="Burger" width="300" height="200"></td>
-              <td><img src="https://pixel.nymag.com/imgs/daily/grub/2016/08/11/11-sad-burger.w700.h467.jpg" alt="Burger" title="Burger" width="300" height="200"></td>
-              <td><img src="http://www.burgersofmelbourne.com.au/wp-content/uploads/2015/12/hold-burger-saki-souvlaki.jpg" alt="Burger" title="Burger" width="300" height="200"></td>
-            </tr>
-            <tr align="center">
-              <td><ul>
-                  <li>1250 kCal</li>
-                  <li>Contains gluten</li>
-                  <li>Contains egg</li>
-              </ul></td>
-              <td><ul>
-                  <li>750 kCal</li>
-                  <li>Contains lactose</li>
-                  <li>Contains gluten</li>
-              </ul></td>
-              <td><ul>
-                  <li>1460 kCal</li>
-                  <li>Contains lactose</li>
-              </ul></td>
-            </tr>
-        </table>
+
+        <div id="gridcontainer">
+          <div class="burgerheader">
+            <h3>The Fire Burger</h3>
+          </div>
+          <div class="burgerheader">
+            <h3>The Sad Burger</h3>
+          </div>
+          <div class="burgerheader">
+            <h3>The Cheesy Burger</h3>
+          </div>
+          <div class="burgerimage">
+            <img src="https://ocweekly.com/wp-content/uploads/2018/10/6625544_slaters_fire_burger.jpg" alt="Burger" title="Burger" width="300" height="200">
+          </div>
+          <div class="burgerimage">
+            <img src="https://pixel.nymag.com/imgs/daily/grub/2016/08/11/11-sad-burger.w700.h467.jpg" alt="Burger" title="Burger" width="300" height="200">
+          </div>
+          <div class="burgerimage">
+            <img src="http://www.burgersofmelbourne.com.au/wp-content/uploads/2015/12/hold-burger-saki-souvlaki.jpg" alt="Burger" title="Burger" width="300" height="200">
+          </div>
+          <div class="burgertext">
+            <ul>
+              <li>1250 kCal</li>
+              <li>Contains gluten</li>
+              <li>Contains egg</li>
+            </ul>
+          </div>
+          <div class="burgertext">
+            <ul>
+              <li>750 kCal</li>
+              <li>Contains lactose</li>
+              <li>Contains gluten</li>
+            </ul>
+          </div>
+          <div class="burgertext">
+            <ul>
+              <li>1460 kCal</li>
+              <li>Contains lactose</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section id="information">
@@ -89,8 +104,8 @@
             <input type="radio" name="gender" value="non-binary"> Non-binary<br>
             <input type="radio" name="gender" value="undisclosed" checked> Undisclosed<br>
           </form>
-          <button type="submit"><img src="http://mobiblitz.co.za/wp-content/uploads/2014/12/Place-Order-Orange.gif"></button>
       </section>
+      <button type="submit"><img src="http://mobiblitz.co.za/wp-content/uploads/2014/12/Place-Order-Orange.gif"></button>
     </main>
 
     <footer>
