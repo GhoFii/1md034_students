@@ -6,10 +6,14 @@ body  {
 #burgers {
     background-color: black;
     color: white;
+    border: 2px dashed white;
+    padding-left: 10px;
 }
 
 #information {
-
+    border: 2px dashed black;
+    padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 button:hover {
