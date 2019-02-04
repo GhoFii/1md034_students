@@ -1,115 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script type="text/javascript" src="js/menu.js" defer></script>
+    <script src="https://vuejs.org/js/vue.js" defer></script>
+    <script src="js/vue_script.js" defer></script>
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Page title shown in window title</title>
+    <title>SpaceBurgers</title>
+    <link rel="icon" href="https://juststickers.in/wp-content/uploads/2017/06/pixel-burger.png">
     <meta charset="utf-8"/>
   </head>
 
   <body>
+    <figure id="headerimage">
+      <img id="topimage" src="http://www.craftlakewood.com/images/slideshow/craft-slide.jpg">
+      <div id="headertext">
+        <h1>Welcome to SpaceBurgers Online</h1>
+      </div>
+    </figure>
     <main>
-      <figure id="headerimage">
-        <img id="topimage" src="http://www.craftlakewood.com/images/slideshow/craft-slide.jpg">
-        <div id="headertext">
-          <h1>Welcome to BurgerHeaven Online</h1>
-        </div>
-      </figure>
-
-      <section id="burgers">
-        <h2>Select burger</h2>
-        <div>This is where you execute burger selection</div><br>
-
-        <div id="gridcontainer">
-          <div class="burgerheader">
-            <h3>The Fire Burger</h3>
-          </div>
-          <div class="burgerheader">
-            <h3>The Sad Burger</h3>
-          </div>
-          <div class="burgerheader">
-            <h3>The Cheesy Burger</h3>
-          </div>
-          <div class="burgerimage">
-            <img src="https://ocweekly.com/wp-content/uploads/2018/10/6625544_slaters_fire_burger.jpg" alt="Burger" title="Burger" width="300" height="200">
-          </div>
-          <div class="burgerimage">
-            <img src="https://pixel.nymag.com/imgs/daily/grub/2016/08/11/11-sad-burger.w700.h467.jpg" alt="Burger" title="Burger" width="300" height="200">
-          </div>
-          <div class="burgerimage">
-            <img src="http://www.burgersofmelbourne.com.au/wp-content/uploads/2015/12/hold-burger-saki-souvlaki.jpg" alt="Burger" title="Burger" width="300" height="200">
-          </div>
-          <div class="burgertext">
-            <ul>
-              <li>1250 kCal</li>
-              <li>Contains gluten</li>
-              <li>Contains egg</li>
+      <div id="app">
+        <section id="burgers">
+          <span class="head">
+            <h1>{{ title }}</h1>
+          </span>
+          <br>
+          <div class="grid-container" v-for="burger in menu">
+            <div class="gridtitle">{{ burger.name }}</div>
+            <ul class="gridtext">
+              <li>{{ burger.kcal }} kcal</li>
+              <li v-if="burger.gluten">Gluten</li>
+              <li v-if="burger.lactose">Lactose</li>
             </ul>
-          </div>
-          <div class="burgertext">
-            <ul>
-              <li>750 kCal</li>
-              <li>Contains lactose</li>
-              <li>Contains gluten</li>
-            </ul>
-          </div>
-          <div class="burgertext">
-            <ul>
-              <li>1460 kCal</li>
-              <li>Contains lactose</li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
-      <section id="information">
-        <h2>Customer information</h2>
-        <div>This is where you provide necessary information</div>
-        <h3>Delivery Information:</h3>
-        <form>
-          <p>
-            <label for="firstname">First</label><br>
-            <input type="text" id="firstname" name="fn" required="required" placeholder="First name">
-          </p>
-          <p>
-            <label for="lastname">Last</label><br>
-            <input type="text" id="lastname" name="ln" required="required" placeholder="Last name">
-          </p>
-          <p>
-            <label for="email">E-mail</label><br>
-            <input type="text" id="email" name="em" required="required" placeholder="E-mail adress">
-          </p>
-           <p>
-            <label for="street">Street</label><br>
-            <input type="text" id="street" name="str" required="required" placeholder="Street name">
-           </p>
-          <p>
-            <label for="house">House</label><br>
-            <input type="text" id="house" name="hs" required="required" placeholder="House number">
-          </p>
-        </form>
-        <p>
-          <label for="payment">Payment options</label><br>
-          <select id="payment" name="pay">
-            <option>Credit card</option>
-            <option>PayPal</option>
-            <option>PaySafe</option>
-            <option>BitCoin</option>
-          </select>
-        </p>
-        <p>
-          <form action="male">
-            <label for="gender"> Gender</label><br>
-            <input type="radio" name="gender" value="male"> Male<br>
-            <input type="radio" name="gender" value="woman"> Woman<br>
-            <input type="radio" name="gender" value="non-binary"> Non-binary<br>
-            <input type="radio" name="gender" value="undisclosed" checked> Undisclosed<br>
+            <div class="gridimage"><img v-bind:src="burger.img"></div>
+            <div class="gridcheck">
+              <input type="checkbox" v-bind:value="burger" v-model="cart">
+            </div>
+          </div>
+          <div class="select">
+            <h1>Selected:
+              <span v-for="burger in cart">
+                {{   burger.name }}
+                <span v-if="burger != cart[cart.length-1]">|</span>
+              </span>
+            </h1>
+
+          </div>
+        </section>
+
+        <div class="clear"></div>
+
+        <section id="information">
+          <form>
+            <p>
+              <label for="firstname">First</label><br>
+              <input type="text" v-model="order.fn" placeholder="First name">
+            </p>
+            <p>
+              <label for="lastname">Last</label><br>
+              <input type="text" v-model="order.ln" placeholder="Last name">
+            </p>
+            <p>
+              <label for="email">E-mail</label><br>
+              <input type="text" v-model="order.email" placeholder="E-mail adress">
+            </p>
+            <p>
+              <label for="street">Street</label><br>
+              <input type="text" v-model="order.street" placeholder="Street name">
+            </p>
+            <p>
+              <label for="house">House</label><br>
+              <input type="text" v-model="order.house" placeholder="House number">
+            </p>
           </form>
-      </section>
-      <button type="submit"><img src="http://mobiblitz.co.za/wp-content/uploads/2014/12/Place-Order-Orange.gif"></button>
+          <p>
+            <label for="payment">Payment options</label><br>
+            <select v-model="order.pay">
+              <option>Credit card</option>
+              <option>PayPal</option>
+              <option>PaySafe</option>
+              <option>BitCoin</option>
+            </select>
+          </p>
+          <p>
+            <form action="male">
+              <label for="gender"> Gender</label><br>
+              <input type="radio" value="Male" v-model="order.gen"> Male<br>
+              <input type="radio" value="Woman" v-model="order.gen"> Woman<br>
+              <input type="radio" value="Non-binary" v-model="order.gen"> Non-binary<br>
+              <input type="radio" value="Undisclosed" v-model="order.gen"> Undisclosed<br>
+            </form>
+            <button v-on:click="getOrder(order.fn, order.ln, order.email, order.street, order.house, order.pay, order.gen, cart)"><img src="https://juststickers.in/wp-content/uploads/2017/06/pixel-burger.png"></button>
+        </section>
+        <section id="information">
+          <h3>Orders:</h3>
+          <div v-for="value in orders">
+            <li> {{ value.fn }} {{ value.ln }} | {{ value.email}} | {{ value.street}} {{ value.house }} | {{ value.pay }} | {{ value.gen}}
+
+              <div v-for="burger in value.cart">
+                {{ burger.name }}
+
+              </div>
+            </li>
+          </div>
+        </section>
+      </div>
     </main>
 
+    <div class="clear"></div>
+
     <footer>
-      <hr>
       <div>&copy 2018 Hypothetical Burger Inc.</div>
     </footer>
   </body>
