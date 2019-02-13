@@ -1,8 +1,6 @@
 
 body {
-    background-image: url("https://i.ytimg.com/vi/fOl6TUPTcO8/maxresdefault.jpg");
-    position: absolute;
-    background-size: cover;
+    background-color: #081f3d
 }
 .head {
   margin-left: 5%;

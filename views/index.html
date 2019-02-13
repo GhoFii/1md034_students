@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script type="text/javascript" src="js/menu.js" defer></script>
-    <script src="https://vuejs.org/js/vue.js" defer></script>
-    <script src="js/vue_script.js" defer></script>
+
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/deli-very.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script type="text/javascript" src="js/menu.js" defer></script>
+    <script src="https://vuejs.org/js/vue.js" defer></script>
+    <script src="/vue/vue.js" defer></script>
+
+    <script src="js/vue_script.js" defer></script>
+
+
+
     <title>SpaceBurgers</title>
     <link rel="icon" href="https://juststickers.in/wp-content/uploads/2017/06/pixel-burger.png">
     <meta charset="utf-8"/>
@@ -35,14 +45,14 @@
 
             <div class="gridimage"><img v-bind:src="burger.img"></div>
             <div class="gridcheck">
-              <input type="checkbox" v-bind:value="burger" v-model="cart">
+              <input type="checkbox" v-bind:value="burger.name" v-model="order.items">
             </div>
           </div>
           <div class="select">
             <h1>Selected:
-              <span v-for="burger in cart">
-                {{   burger.name }}
-                <span v-if="burger != cart[cart.length-1]">|</span>
+              <span v-for="burger in order.items">
+                {{   burger }}
+                <span v-if="burger != order.items[order.items.length-1]">|</span>
               </span>
             </h1>
 
@@ -55,28 +65,20 @@
           <form>
             <p>
               <label for="firstname">First</label><br>
-              <input type="text" v-model="order.fn" placeholder="First name">
+              <input type="text" v-model="order.info.fn" placeholder="First name">
             </p>
             <p>
               <label for="lastname">Last</label><br>
-              <input type="text" v-model="order.ln" placeholder="Last name">
+              <input type="text" v-model="order.info.ln" placeholder="Last name">
             </p>
             <p>
               <label for="email">E-mail</label><br>
-              <input type="text" v-model="order.email" placeholder="E-mail adress">
-            </p>
-            <p>
-              <label for="street">Street</label><br>
-              <input type="text" v-model="order.street" placeholder="Street name">
-            </p>
-            <p>
-              <label for="house">House</label><br>
-              <input type="text" v-model="order.house" placeholder="House number">
+              <input type="text" v-model="order.info.email" placeholder="E-mail adress">
             </p>
           </form>
           <p>
             <label for="payment">Payment options</label><br>
-            <select v-model="order.pay">
+            <select v-model="order.info.pay">
               <option>Credit card</option>
               <option>PayPal</option>
               <option>PaySafe</option>
@@ -86,32 +88,47 @@
           <p>
             <form action="male">
               <label for="gender"> Gender</label><br>
-              <input type="radio" value="Male" v-model="order.gen"> Male<br>
-              <input type="radio" value="Woman" v-model="order.gen"> Woman<br>
-              <input type="radio" value="Non-binary" v-model="order.gen"> Non-binary<br>
-              <input type="radio" value="Undisclosed" v-model="order.gen"> Undisclosed<br>
+              <input type="radio" value="Male" v-model="order.info.gen"> Male<br>
+              <input type="radio" value="Woman" v-model="order.info.gen"> Woman<br>
+              <input type="radio" value="Non-binary" v-model="order.info.gen"> Non-binary<br>
+              <input type="radio" value="Undisclosed" v-model="order.info.gen"> Undisclosed<br>
             </form>
-            <button v-on:click="getOrder(order.fn, order.ln, order.email, order.street, order.house, order.pay, order.gen, cart)"><img src="https://juststickers.in/wp-content/uploads/2017/06/pixel-burger.png"></button>
+            <div class="view-box">
+              <div id="dots" v-on:click="displayOrder">
+                <div
+                  v-if="order.details.x"
+                  v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
+                  T
+                </div>
+              </div>
+            </div>
+            <button v-on:click="addOrder"><img src="https://juststickers.in/wp-content/uploads/2017/06/pixel-burger.png"></button>
         </section>
         <section id="information">
-          <h3>Orders:</h3>
-          <div v-for="value in orders">
-            <li> {{ value.fn }} {{ value.ln }} | {{ value.email}} | {{ value.street}} {{ value.house }} | {{ value.pay }} | {{ value.gen}}
+          <h3>Order Confirmation:</h3>
+          <div v-if="orderComplete">
+            <div v-for="(order, key) in orders" v-if="key == orderKey">
+              <h4>Details</h4>
+              Name: {{ order.orderInfo[0]}} {{ order.orderInfo[1]}}
+              <br>
+              Email: {{ order.orderInfo[2]}}
+              <br>
+              Deliver to: {{ order.details.x }}, {{ order.details.y }}
+              <br>
+              Payment: {{ order.orderInfo[3]}}
+              <br>
+              Gender: {{ order.orderInfo[4]}}
 
-              <div v-for="burger in value.cart">
-                {{ burger.name }}
-
-              </div>
-            </li>
+              <h4>Sumarry</h4>
+              {{ order.orderItems.join(", ") }}
+            </div>
           </div>
+
         </section>
+
       </div>
     </main>
 
     <div class="clear"></div>
-
-    <footer>
-      <div>&copy 2018 Hypothetical Burger Inc.</div>
-    </footer>
   </body>
 </html>
